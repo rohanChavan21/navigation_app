@@ -41,7 +41,7 @@ class _MyAppState extends State<MyApp> {
       // routes: {
       //   '/': (ctx) => HomePage(_availableLocations),
       //   // InfoListView.routeName: (ctx) => InfoListView(_availableLocations),
-      //   // MapScreen.routeName: (ctx) => const MapScreen(),
+      // MapScreen.routeName: (ctx) => const MapScreen(),
       //   // SearchScreen.routeName: (ctx) => const SearchScreen(),
       // },
     );

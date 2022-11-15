@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_map_arcgis/flutter_map_arcgis.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -12,19 +14,47 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
+  // var _loadedInitData = false;
+  // // late Map<String, double> coOrdinates;
+  // void initState() {
+  //   super.initState();
+  // }
+
+  // void didChangeDependencies() {
+  //   // if (!_loadedInitData) {
+  //   //   final routeArgs =
+  //   //       ModalRoute.of(context)?.settings.arguments as Map<String, double>;
+  //   //   coOrdinates['longitude'] = routeArgs['longitude']!;
+  //   //   coOrdinates['latitude'] = routeArgs['latitude']!;
+  //   // }
+  //   _loadedInitData = true;
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text(
-        'Explore',
-        style: TextStyle(
-          color: Colors.white,
-          fontStyle: FontStyle.italic,
-          fontSize: 25,
-          fontWeight: FontWeight.bold,
+        title: const Text(
+          'Explore',
+          style: TextStyle(
+            color: Colors.white,
+            fontStyle: FontStyle.italic,
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-      )),
+        actions: [
+          IconButton(
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: MySearchDelegate(),
+              );
+            },
+            icon: const Icon(Icons.search),
+          ),
+        ],
+      ),
       body: Padding(
         padding: EdgeInsets.all(8.0),
         child: Column(
@@ -99,5 +129,73 @@ class _MapScreenState extends State<MapScreen> {
         ),
       ),
     );
+  }
+}
+
+class MySearchDelegate extends SearchDelegate {
+  List<String> searchResults = [
+    'CSE Department',
+    'Mini-CCF',
+    'CCF',
+    'Cyber hostel',
+    'Boys Hostel',
+    'Lipton',
+    'Canteen',
+    'Rector office',
+    'Exam Cell',
+    'Library',
+    'Saraswati Idol'
+  ];
+  @override
+  List<Widget>? buildActions(BuildContext context) => [
+        IconButton(
+          onPressed: () {
+            if (query.isEmpty) {
+              close(context, null);
+            } else {
+              query = '';
+            }
+          },
+          icon: Icon(
+            Icons.clear,
+          ),
+        ),
+      ];
+
+  @override
+  Widget? buildLeading(BuildContext context) => IconButton(
+        onPressed: () => close(context, null),
+        icon: Icon(
+          Icons.arrow_back,
+        ),
+      );
+
+  @override
+  Widget buildResults(BuildContext context) => MapScreen();
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    // TODO: implement buildSuggestions
+    List<String> suggestions = searchResults.where((searchResult) {
+      final result = searchResult.toLowerCase();
+      final input = query.toLowerCase();
+
+      return result.contains(input);
+    }).toList();
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        final suggestion = suggestions[index];
+
+        return ListTile(
+          title: Text(suggestion),
+          onTap: () {
+            query = suggestion;
+            showResults(context);
+          },
+        );
+      },
+      itemCount: suggestions.length,
+    );
+    // throw UnimplementedError();
   }
 }

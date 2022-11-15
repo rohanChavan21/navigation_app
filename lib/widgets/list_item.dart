@@ -17,8 +17,8 @@ class ListItem extends StatelessWidget {
 
   void navigateToLocation(BuildContext ctx) {
     Navigator.of(ctx).pushNamed(MapScreen.routeName, arguments: {
-      'latitude': coOrdinates['latitude'],
       'longitude': coOrdinates['longitude'],
+      'latitude': coOrdinates['latitude'],
     });
   }
 
@@ -54,7 +54,9 @@ class ListItem extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(5),
                     margin: const EdgeInsets.all(2),
-                    child: Text(description),
+                    child: Text(
+                      description,
+                    ),
                   ),
                 ],
               )
@@ -69,16 +71,16 @@ class ListItem extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () => navigateToLocation(context),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.resolveWith(
-                    (states) {
-                      if (states.contains(MaterialState.pressed)) {
-                        return Colors.lightGreen;
-                      }
-                      return Colors.green;
-                    },
-                  ),
-                ),
+                // style: ButtonStyle(
+                //   backgroundColor: MaterialStateProperty.resolveWith(
+                //     (states) {
+                //       if (states.contains(MaterialState.pressed)) {
+                //         return Colors.lightGreen;
+                //       }
+                //       return Colors.green;
+                //     },
+                //   ),
+                // ),
                 child: const Text(
                   'Navigate',
                   textAlign: TextAlign.center,
@@ -89,5 +91,8 @@ class ListItem extends StatelessWidget {
         ],
       ),
     );
+    // return Container(
+    //   child: Card(),
+    // );
   }
 }

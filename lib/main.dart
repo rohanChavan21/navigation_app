@@ -37,13 +37,13 @@ class _MyAppState extends State<MyApp> {
         )),
       ),
       home: HomePage(_availableLocations),
-      // initialRoute: '/',
-      // routes: {
-      //   '/': (ctx) => HomePage(_availableLocations),
-      //   // InfoListView.routeName: (ctx) => InfoListView(_availableLocations),
-      // MapScreen.routeName: (ctx) => const MapScreen(),
-      //   // SearchScreen.routeName: (ctx) => const SearchScreen(),
-      // },
+      initialRoute: '/',
+      routes: {
+        //   '/': (ctx) => HomePage(_availableLocations),
+        //   // InfoListView.routeName: (ctx) => InfoListView(_availableLocations),
+        MapScreen.routeName: (ctx) => const MapScreen(),
+        //   // SearchScreen.routeName: (ctx) => const SearchScreen(),
+      },
     );
   }
 }

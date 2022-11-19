@@ -17,8 +17,8 @@ class ListItem extends StatelessWidget {
 
   void navigateToLocation(BuildContext ctx) {
     Navigator.of(ctx).pushNamed(MapScreen.routeName, arguments: {
-      'longitude': coOrdinates['longitude'],
       'latitude': coOrdinates['latitude'],
+      'longitude': coOrdinates['longitude'],
     });
   }
 
@@ -27,7 +27,6 @@ class ListItem extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       elevation: 4,
-      margin: const EdgeInsets.all(10),
       child: Column(
         children: [
           Row(
@@ -43,22 +42,36 @@ class ListItem extends StatelessWidget {
                   fit: BoxFit.contain,
                 ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(5),
-                    margin: const EdgeInsets.all(2),
-                    child: Text(title),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(5),
-                    margin: const EdgeInsets.all(2),
-                    child: Text(
-                      description,
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(5),
+                      margin: const EdgeInsets.all(2),
+                      child: Text(
+                        title,
+                        style: const TextStyle(
+                          background: null,
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
+                      ),
                     ),
-                  ),
-                ],
+                    Container(
+                      padding: const EdgeInsets.all(5),
+                      margin: const EdgeInsets.all(2),
+                      child: Text(
+                        description,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          background: null,
+                          fontSize: 10,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               )
             ],
           ),
